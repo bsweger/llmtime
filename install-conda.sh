@@ -23,5 +23,6 @@ conda install multiprocess
 conda install SentencePiece
 conda install accelerate
 conda install gdownn
+conda install python-dotenv
 
 conda deactivate
