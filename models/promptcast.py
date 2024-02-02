@@ -273,11 +273,15 @@ def get_promptcast_predictions_data(train, test, model, settings, num_samples=10
     medians = None
     completions_list = None
     input_strs = None
+
+    if kwargs.get('parallel') is None:
+        kwargs = {**kwargs, 'parallel': True}
+
     if num_samples > 0:
         # Generate predictions
         preds, completions_list, input_strs = generate_predictions(model, inputs, steps, settings, scalers,
                                                                     num_samples=num_samples, temp=temp, prompts=prompts, post_prompts=post_prompts,
-                                                                    parallel=True, return_input_strs=True, constrain_tokens=False, strict_handling=True, **kwargs)
+                                                                    return_input_strs=True, constrain_tokens=False, strict_handling=True, **kwargs)
         # skip bad samples
         samples = [pd.DataFrame(np.array([p for p in preds[i] if p is not None]), columns=test[i].index) for i in range(len(preds))] 
         medians = [sample.median(axis=0) for sample in samples]
