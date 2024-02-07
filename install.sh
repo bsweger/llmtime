@@ -19,5 +19,4 @@ pip install multiprocess
 pip install SentencePiece
 pip install accelerate
 pip install gdown
-pip install python-dotenv
 conda deactivate
